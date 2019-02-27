@@ -21,10 +21,11 @@ export default class EmployeeList extends Component {
     }
 
     render() {
-        console.log(this.state.employeeList);
-
         return (
-            <div className="container">
+            <div>
+                社員管理
+                <button onClick={this.props.handleChangePage.bind(this, 'add')}>新規追加</button>
+
                 <table>
                     <thead>
                         <tr>
@@ -54,8 +55,4 @@ export default class EmployeeList extends Component {
             </div>
         );
     }
-}
-
-if (document.getElementById('example')) {
-    ReactDOM.render(<EmployeeList />, document.getElementById('example'));
 }
