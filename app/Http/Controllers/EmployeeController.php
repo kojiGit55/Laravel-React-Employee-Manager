@@ -25,7 +25,9 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = Employee::createEmployee($request);
+
+        return response()->json($employee, 201);
     }
 
     /**
