@@ -8,11 +8,11 @@ export default class AddEmployee extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employee_id: 0,
+            employee_id: '',
             name: '',
-            year: 0,
-            department_id: 0,
-            position_id: 0
+            year: '',
+            department_id: '',
+            position_id: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.addEmployee = this.addEmployee.bind(this);
@@ -42,28 +42,38 @@ export default class AddEmployee extends Component {
         return (
             <div>
                 <button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</button>
-                <label>
-                    社員番号
-                    <input name="employee_id" value={this.state.employee_id} onChange={this.handleChange} />
-                </label>
-                <label>
-                    名前
-                    <input name="name" value={this.state.name} onChange={this.handleChange} />
-                </label>
-                <label>
-                    勤続年数
-                    <input name="year" value={this.state.year} onChange={this.handleChange} />
-                </label>
-                <label>
-                    部署
-                    <input name="department_id" value={this.state.department_id} onChange={this.handleChange} />
-                </label>
-                <label>
-                    役職
-                    <input name="position_id" value={this.state.position_id} onChange={this.handleChange} />
-                </label>
+                <div>
+                    <label>
+                        社員番号
+                        <input name="employee_id" value={this.state.employee_id} onChange={this.handleChange} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        名前
+                        <input name="name" value={this.state.name} onChange={this.handleChange} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        勤続年数
+                        <input name="year" value={this.state.year} onChange={this.handleChange} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        部署
+                        <input name="department_id" value={this.state.department_id} onChange={this.handleChange} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        役職
+                        <input name="position_id" value={this.state.position_id} onChange={this.handleChange} />
+                    </label>
+                </div>
 
-                <button onClick={this.addEmployee}></button>
+                <button onClick={this.addEmployee}>社員を追加</button>
             </div>
         );
     }
