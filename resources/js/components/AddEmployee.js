@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import EmployeeList from "./EmployeeList";
-
+import Input from "./Input";
 
 export default class AddEmployee extends Component {
     constructor(props) {
@@ -42,36 +42,11 @@ export default class AddEmployee extends Component {
         return (
             <div>
                 <button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</button>
-                <div>
-                    <label>
-                        社員番号
-                        <input name="employee_id" value={this.state.employee_id} onChange={this.handleChange} />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        名前
-                        <input name="name" value={this.state.name} onChange={this.handleChange} />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        勤続年数
-                        <input name="year" value={this.state.year} onChange={this.handleChange} />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        部署
-                        <input name="department_id" value={this.state.department_id} onChange={this.handleChange} />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        役職
-                        <input name="position_id" value={this.state.position_id} onChange={this.handleChange} />
-                    </label>
-                </div>
+                <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
+                <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
+                <Input labelText="勤続年数"　name="year" inputValue={this.state.year} handleChange={this.handleChange} />
+                <Input labelText="部署"　name="department_id" inputValue={this.state.department_id} handleChange={this.handleChange} />
+                <Input labelText="役職"　name="position_id" inputValue={this.state.position_id} handleChange={this.handleChange} />
 
                 <button onClick={this.addEmployee}>社員を追加</button>
             </div>
