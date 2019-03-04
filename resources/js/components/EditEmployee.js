@@ -14,6 +14,7 @@ export default class EditEmployee extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.editEmployee = this.editEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
     }
 
     componentDidMount() {
@@ -51,6 +52,19 @@ export default class EditEmployee extends Component {
         })
     }
 
+    deleteEmployee() {
+        if (!window.confirm('本当にこの社員を削除しますか？')) return;
+
+        axios.delete(`/api/employees/${this.props.selectedEmployeeId}`)
+            .then(res => {
+                alert('社員の削除に成功しました');
+            }).catch(err => {
+                alert('社員の削除に失敗しました');
+            }).finally(() => {
+                this.props.handleChangePage('list');
+            })
+    }
+
     render() {
         return (
             <div>
@@ -61,6 +75,7 @@ export default class EditEmployee extends Component {
                 <Input labelText="部署"　name="department_id" inputValue={this.state.department_id} handleChange={this.handleChange} />
                 <Input labelText="役職"　name="position_id" inputValue={this.state.position_id} handleChange={this.handleChange} />
 
+                <button onClick={this.deleteEmployee}>社員を削除</button>
                 <button onClick={this.editEmployee}>社員を編集</button>
             </div>
         );
