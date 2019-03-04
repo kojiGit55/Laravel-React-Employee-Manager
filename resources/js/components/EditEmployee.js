@@ -1,0 +1,68 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+import Input from "./Input";
+
+export default class EditEmployee extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            employee_id: '',
+            name: '',
+            year: '',
+            department_id: '',
+            position_id: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.editEmployee = this.editEmployee.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get(`/api/employees/${this.props.selectedEmployeeId}`)
+            .then(res => {
+                this.setState({
+                    employee_id: res.data.employee_id,
+                    name: res.data.name,
+                    year: res.data.year,
+                    department_id: res.data.department_id,
+                    position_id: res.data.position_id
+                });
+            }).catch(err => {
+
+            })
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    editEmployee() {
+        axios.put(`/api/employees/${this.props.selectedEmployeeId}`, {
+            employee_id: this.state.employee_id,
+            name: this.state.name,
+            year: this.state.year,
+            department_id: this.state.department_id,
+            position_id: this.state.position_id,
+        }).then(res => {
+            alert('社員の編集に成功しました');
+        }).catch(err => {
+            alert('社員の編集に失敗しました');
+        }).finally(() => {
+            this.props.handleChangePage('list');
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</button>
+                <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
+                <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
+                <Input labelText="勤続年数"　name="year" inputValue={this.state.year} handleChange={this.handleChange} />
+                <Input labelText="部署"　name="department_id" inputValue={this.state.department_id} handleChange={this.handleChange} />
+                <Input labelText="役職"　name="position_id" inputValue={this.state.position_id} handleChange={this.handleChange} />
+
+                <button onClick={this.editEmployee}>社員を編集</button>
+            </div>
+        );
+    }
+}

@@ -20,6 +20,11 @@ export default class EmployeeList extends Component {
         });
     }
 
+    handleClickRow(employeeId) {
+        this.props.setSelectedEmployeeId(employeeId);
+        this.props.handleChangePage('edit');
+    }
+
     render() {
         return (
             <div>
@@ -40,7 +45,7 @@ export default class EmployeeList extends Component {
                         {
                             this.state.employeeList.map(employee => {
                                 return (
-                                    <tr key={employee.id}>
+                                    <tr key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
                                         <td>{employee.employee_id}</td>
                                         <td>{employee.name}</td>
                                         <td>{employee.year}</td>
