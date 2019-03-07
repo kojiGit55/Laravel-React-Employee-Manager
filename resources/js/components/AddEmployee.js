@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-import EmployeeList from "./EmployeeList";
+import Button from '@material-ui/core/Button';
 import Input from "./Input";
 
 export default class AddEmployee extends Component {
@@ -41,14 +40,14 @@ export default class AddEmployee extends Component {
     render() {
         return (
             <div>
-                <button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</button>
+                <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
                 <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
                 <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
                 <Input labelText="勤続年数"　name="year" inputValue={this.state.year} handleChange={this.handleChange} />
                 <Input labelText="部署"　name="department_id" inputValue={this.state.department_id} handleChange={this.handleChange} />
                 <Input labelText="役職"　name="position_id" inputValue={this.state.position_id} handleChange={this.handleChange} />
 
-                <button onClick={this.addEmployee}>社員を追加</button>
+                <Button onClick={this.addEmployee}>社員を追加</Button>
             </div>
         );
     }

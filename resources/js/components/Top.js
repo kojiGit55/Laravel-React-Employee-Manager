@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import EmployeeList from "./EmployeeList";
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
+import Header from "./Header";
 
 export default class Top extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ export default class Top extends Component {
     render() {
         return (
             <div className="container">
+                <Header/>
                 {
                     this.state.page === 'list' &&
                     <EmployeeList

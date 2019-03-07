@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Input from "./Input";
+import Button from '@material-ui/core/Button';
 
 export default class EditEmployee extends Component {
     constructor(props) {
@@ -68,15 +69,15 @@ export default class EditEmployee extends Component {
     render() {
         return (
             <div>
-                <button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</button>
+                <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
                 <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
                 <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
                 <Input labelText="勤続年数"　name="year" inputValue={this.state.year} handleChange={this.handleChange} />
                 <Input labelText="部署"　name="department_id" inputValue={this.state.department_id} handleChange={this.handleChange} />
                 <Input labelText="役職"　name="position_id" inputValue={this.state.position_id} handleChange={this.handleChange} />
 
-                <button onClick={this.deleteEmployee}>社員を削除</button>
-                <button onClick={this.editEmployee}>社員を編集</button>
+                <Button onClick={this.deleteEmployee}>社員を削除</Button>
+                <Button onClick={this.editEmployee}>社員を編集</Button>
             </div>
         );
     }

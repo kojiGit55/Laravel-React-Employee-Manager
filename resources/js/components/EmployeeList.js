@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 export default class EmployeeList extends Component {
     constructor(props) {
@@ -10,7 +14,6 @@ export default class EmployeeList extends Component {
             employeeList: []
         }
     }
-
 
     componentDidMount() {
         axios.get('/api/employees').then(res => {
@@ -28,35 +31,34 @@ export default class EmployeeList extends Component {
     render() {
         return (
             <div>
-                社員管理
-                <button onClick={this.props.handleChangePage.bind(this, 'add')}>新規追加</button>
+                <Button color="primary" onClick={this.props.handleChangePage.bind(this, 'add')}>新規追加</Button>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <td>社員番号</td>
-                            <td>名前</td>
-                            <td>勤続年数</td>
-                            <td>部署</td>
-                            <td>役職</td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>社員番号</TableCell>
+                            <TableCell>名前</TableCell>
+                            <TableCell>勤続年数</TableCell>
+                            <TableCell>部署</TableCell>
+                            <TableCell>役職</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {
                             this.state.employeeList.map(employee => {
                                 return (
-                                    <tr key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
-                                        <td>{employee.employee_id}</td>
-                                        <td>{employee.name}</td>
-                                        <td>{employee.year}</td>
-                                        <td>{employee.department_id}</td>
-                                        <td>{employee.position_id}</td>
-                                    </tr>
+                                    <TableRow key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
+                                        <TableCell>{employee.employee_id}</TableCell>
+                                        <TableCell>{employee.name}</TableCell>
+                                        <TableCell>{employee.year}</TableCell>
+                                        <TableCell>{employee.department_id}</TableCell>
+                                        <TableCell>{employee.position_id}</TableCell>
+                                    </TableRow>
                                 );
                             })
                         }
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
             </div>
         );
     }
