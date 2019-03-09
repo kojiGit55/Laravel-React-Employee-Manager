@@ -46,13 +46,15 @@ export default class EmployeeList extends Component {
                     <TableBody>
                         {
                             this.state.employeeList.map(employee => {
+                                const department = this.props.departmentList.find(dep => dep.id === employee.department_id);
+                                const position = this.props.positionList.find(dep => dep.id === employee.position_id);
                                 return (
                                     <TableRow key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
                                         <TableCell>{employee.employee_id}</TableCell>
                                         <TableCell>{employee.name}</TableCell>
                                         <TableCell>{employee.year}</TableCell>
-                                        <TableCell>{employee.department_id}</TableCell>
-                                        <TableCell>{employee.position_id}</TableCell>
+                                        <TableCell>{department !== undefined && department.name}</TableCell>
+                                        <TableCell>{position !== undefined && position.name}</TableCell>
                                     </TableRow>
                                 );
                             })
