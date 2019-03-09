@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
 use Illuminate\Http\Request;
+use App\Services\EmployeeService;
 
 class EmployeeController extends Controller
 {
+    private $employee;
+
+    public function __construct(EmployeeService $employee)
+    {
+        $this->employee = $employee;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return response()->json(Employee::orderBy('employee_id')->get());
+        $employees = $this->employee->getEmployees();
+        return response()->json($employees);
     }
 
     /**
@@ -25,7 +33,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employee = Employee::createEmployee($request);
+        $employee = $this->employee->createEmployee(
+            $request->employee_id,
+            $request->name,
+            $request->year,
+            $request->department_id,
+            $request->position_id
+        );
 
         return response()->json($employee, 201);
     }
@@ -38,7 +52,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::where('employee_id', $id)->first();
+        $employee = $this->employee->getEmployeeByEmployeeId($id);
 
         return response()->json($employee);
     }
@@ -52,14 +66,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::where('employee_id', $id)->first();
-        $employee->employee_id = $request->employee_id;
-        $employee->name = $request->name;
-        $employee->year = $request->year;
-        $employee->department_id = $request->department_id;
-        $employee->position_id = $request->position_id;
-
-        $employee->save();
+        $employee = $this->employee->updateEmployee(
+            $id,
+            $request->employee_id,
+            $request->name,
+            $request->year,
+            $request->department_id,
+            $request->position_id
+        );
 
         return response()->json($employee);
     }
@@ -72,9 +86,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::where('employee_id', $id)->first();
-
-        $employee->delete();
+        $this->employee->deleteEmployee($id);
 
         return response()->json(null, 204);
     }
