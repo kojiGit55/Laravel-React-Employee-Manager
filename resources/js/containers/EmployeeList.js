@@ -38,7 +38,7 @@ export default class EmployeeList extends Component {
                         <TableRow>
                             <TableCell>社員番号</TableCell>
                             <TableCell>名前</TableCell>
-                            <TableCell>勤続年数</TableCell>
+                            <TableCell>年齢</TableCell>
                             <TableCell>部署</TableCell>
                             <TableCell>役職</TableCell>
                         </TableRow>
@@ -52,7 +52,7 @@ export default class EmployeeList extends Component {
                                     <TableRow key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
                                         <TableCell>{employee.employee_id}</TableCell>
                                         <TableCell>{employee.name}</TableCell>
-                                        <TableCell>{employee.year}</TableCell>
+                                        <TableCell>{employee.age}</TableCell>
                                         <TableCell>{department !== undefined && department.name}</TableCell>
                                         <TableCell>{position !== undefined && position.name}</TableCell>
                                     </TableRow>

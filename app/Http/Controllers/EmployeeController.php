@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         $employee = $this->employee->createEmployee(
             $request->employee_id,
             $request->name,
-            $request->year,
+            $request->age,
             $request->department_id,
             $request->position_id
         );
@@ -70,7 +70,7 @@ class EmployeeController extends Controller
             $id,
             $request->employee_id,
             $request->name,
-            $request->year,
+            $request->age,
             $request->department_id,
             $request->position_id
         );

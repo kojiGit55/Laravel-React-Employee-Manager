@@ -21,24 +21,24 @@ class EmployeeService
         return Employee::where('employee_id', $employeeId)->first();
     }
 
-    public function createEmployee(int $employeeId, string $name, int $year, int $departmentId, int $positionId)
+    public function createEmployee(int $employeeId, string $name, int $age, int $departmentId, int $positionId)
     {
         $employee = new Employee();
         $employee->employee_id = $employeeId;
         $employee->name = $name;
-        $employee->year = $year;
+        $employee->age = $age;
         $employee->department_id = $departmentId;
         $employee->position_id = $positionId;
 
         return $employee->save();
     }
 
-    public function updateEmployee(int $employeeId, int $updatedEmployeeId, string $name, int $year, int $departmentId, int $positionId)
+    public function updateEmployee(int $employeeId, int $updatedEmployeeId, string $name, int $age, int $departmentId, int $positionId)
     {
         $employee = Employee::where('employee_id', $employeeId)->first();
         $employee->employee_id = $updatedEmployeeId;
         $employee->name = $name;
-        $employee->year = $year;
+        $employee->age = $age;
         $employee->department_id = $departmentId;
         $employee->position_id = $positionId;
 

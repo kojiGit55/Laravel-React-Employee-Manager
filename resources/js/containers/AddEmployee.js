@@ -10,7 +10,7 @@ export default class AddEmployee extends Component {
         this.state = {
             employee_id: '',
             name: '',
-            year: '',
+            age: '',
             department_id: '',
             position_id: ''
         };
@@ -26,7 +26,7 @@ export default class AddEmployee extends Component {
         axios.post('/api/employees', {
             employee_id: this.state.employee_id,
             name: this.state.name,
-            year: this.state.year,
+            age: this.state.age,
             department_id: this.state.department_id,
             position_id: this.state.position_id,
         }).then(res => {
@@ -41,10 +41,9 @@ export default class AddEmployee extends Component {
     render() {
         return (
             <div>
-                <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
                 <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
                 <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
-                <Input labelText="勤続年数"　name="year" inputValue={this.state.year} handleChange={this.handleChange} />
+                <Input labelText="年齢"　name="age" inputValue={this.state.age} handleChange={this.handleChange} />
                 <SelectBox
                     labelText="部署"
                     name="department_id"
@@ -59,6 +58,7 @@ export default class AddEmployee extends Component {
                     handleChange={this.handleChange}
                     optionList={this.props.positionList}
                 />
+                <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
 
                 <Button onClick={this.addEmployee}>社員を追加</Button>
             </div>
