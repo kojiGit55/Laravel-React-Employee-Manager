@@ -11,3 +11,15 @@ $factory->define(App\Employee::class, function (Faker $faker) {
         'position_id' => $faker->numberBetween(1, 5),
     ];
 });
+
+$factory->define(App\Department::class, function (Faker $faker) {
+    return [
+        'name' => $faker->word,
+    ];
+});
+
+$factory->define(App\Position::class, function (Faker $faker) {
+    return [
+        'name' => $faker->word,
+    ];
+});
