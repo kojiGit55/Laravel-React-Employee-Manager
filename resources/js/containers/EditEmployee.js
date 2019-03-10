@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Input from "../components/Input";
 import Button from '@material-ui/core/Button';
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+import SelectBox from "../components/SelectBox";
 
 export default class EditEmployee extends Component {
     constructor(props) {
@@ -76,36 +74,20 @@ export default class EditEmployee extends Component {
                 <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
                 <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
                 <Input labelText="勤続年数"　name="year" inputValue={this.state.year} handleChange={this.handleChange} />
-                <InputLabel htmlFor="department_id">部署</InputLabel>
-                <Select
-                    inputProps={{
-                        name: 'department_id',
-                        id: 'department_id',
-                    }}
+                <SelectBox
+                    labelText="部署"
+                    name="department_id"
                     value={this.state.department_id}
-                    onChange={this.handleChange}
-                >
-                    {
-                        this.props.departmentList.map(department => {
-                            return <MenuItem value={department.id} key={department.id}>{department.name}</MenuItem>;
-                        })
-                    }
-                </Select>
-                <InputLabel htmlFor="department_id">役職</InputLabel>
-                <Select
-                    inputProps={{
-                        name: 'position_id',
-                        id: 'position_id',
-                    }}
+                    handleChange={this.handleChange}
+                    optionList={this.props.departmentList}
+                />
+                <SelectBox
+                    labelText="役職"
+                    name="position_id"
                     value={this.state.position_id}
-                    onChange={this.handleChange}
-                >
-                    {
-                        this.props.positionList.map(position => {
-                            return <MenuItem value={position.id} key={position.id}>{position.name}</MenuItem>;
-                        })
-                    }
-                </Select>
+                    handleChange={this.handleChange}
+                    optionList={this.props.positionList}
+                />
 
                 <Button onClick={this.deleteEmployee}>社員を削除</Button>
                 <Button onClick={this.editEmployee}>社員を編集</Button>
