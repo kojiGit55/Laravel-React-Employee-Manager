@@ -23,7 +23,7 @@ class EmployeeServiceTest extends TestCase
             'id' => 1,
             'employee_id' => 1,
             'name' => 'A山A太郎',
-            'year' => 5,
+            'age' => 5,
             'department_id' => 3,
             'position_id' => 3
         ]);
@@ -68,7 +68,7 @@ class EmployeeServiceTest extends TestCase
         $this->assertDatabaseHas('employees', [
             'employee_id' => 2,
             'name' => 'B山B太郎',
-            'year' => 10,
+            'age' => 10,
             'department_id' => 3,
             'position_id' => 3
         ]);
@@ -93,7 +93,7 @@ class EmployeeServiceTest extends TestCase
             'id' => 1,
             'employee_id' => 1,
             'name' => 'A山A太郎',
-            'year' => 10,
+            'age' => 10,
             'department_id' => 1,
             'position_id' => 1
         ]);
