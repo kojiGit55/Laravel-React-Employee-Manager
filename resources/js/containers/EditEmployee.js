@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Input from "../components/Input";
 import Button from '@material-ui/core/Button';
-import Input from "./Input";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
-export default class AddEmployee extends Component {
+export default class EditEmployee extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,27 +17,56 @@ export default class AddEmployee extends Component {
             position_id: ''
         };
         this.handleChange = this.handleChange.bind(this);
-        this.addEmployee = this.addEmployee.bind(this);
+        this.editEmployee = this.editEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get(`/api/employees/${this.props.selectedEmployeeId}`)
+            .then(res => {
+                this.setState({
+                    employee_id: res.data.employee_id,
+                    name: res.data.name,
+                    year: res.data.year,
+                    department_id: res.data.department_id,
+                    position_id: res.data.position_id
+                });
+            }).catch(err => {
+
+            })
     }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    addEmployee() {
-        axios.post('/api/employees', {
+    editEmployee() {
+        axios.put(`/api/employees/${this.props.selectedEmployeeId}`, {
             employee_id: this.state.employee_id,
             name: this.state.name,
             year: this.state.year,
             department_id: this.state.department_id,
             position_id: this.state.position_id,
         }).then(res => {
-            alert('社員の追加に成功しました');
+            alert('社員の編集に成功しました');
         }).catch(err => {
-            alert('社員の追加に失敗しました');
+            alert('社員の編集に失敗しました');
         }).finally(() => {
             this.props.handleChangePage('list');
         })
+    }
+
+    deleteEmployee() {
+        if (!window.confirm('本当にこの社員を削除しますか？')) return;
+
+        axios.delete(`/api/employees/${this.props.selectedEmployeeId}`)
+            .then(res => {
+                alert('社員の削除に成功しました');
+            }).catch(err => {
+                alert('社員の削除に失敗しました');
+            }).finally(() => {
+                this.props.handleChangePage('list');
+            })
     }
 
     render() {
@@ -77,7 +106,9 @@ export default class AddEmployee extends Component {
                         })
                     }
                 </Select>
-                <Button onClick={this.addEmployee}>社員を追加</Button>
+
+                <Button onClick={this.deleteEmployee}>社員を削除</Button>
+                <Button onClick={this.editEmployee}>社員を編集</Button>
             </div>
         );
     }

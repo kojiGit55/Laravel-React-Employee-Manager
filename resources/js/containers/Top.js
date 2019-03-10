@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import EmployeeList from "./EmployeeList";
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
-import Header from "./Header";
+import Header from "../components/Header";
 import axios from "axios";
 
 export default class Top extends Component {
