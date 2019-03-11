@@ -30,9 +30,9 @@ export default class AddEmployee extends Component {
             department_id: this.state.department_id,
             position_id: this.state.position_id,
         }).then(res => {
-            alert('社員の追加に成功しました');
+            this.props.setSnackBarMessage('社員の追加に成功しました')
         }).catch(err => {
-            alert('社員の追加に失敗しました');
+            this.props.setSnackBarMessage('社員の追加に失敗しました')
         }).finally(() => {
             this.props.handleChangePage('list');
         })

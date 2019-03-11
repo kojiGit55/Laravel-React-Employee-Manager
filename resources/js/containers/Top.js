@@ -5,6 +5,7 @@ import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
 import Header from "../components/Header";
 import axios from "axios";
+import SnackBarMessage from "../components/SnackBarMessage";
 
 export default class Top extends Component {
     constructor(props) {
@@ -14,9 +15,11 @@ export default class Top extends Component {
             selectedEmployeeId: '',
             departmentList: [],
             positionList: [],
+            snackBarMessage: '',
         };
         this.handleChangePage = this.handleChangePage.bind(this);
         this.setSelectedEmployeeId = this.setSelectedEmployeeId.bind(this);
+        this.setSnackBarMessage = this.setSnackBarMessage.bind(this);
     }
 
     componentDidMount() {
@@ -43,6 +46,12 @@ export default class Top extends Component {
         });
     }
 
+    setSnackBarMessage(message) {
+        this.setState({
+            snackBarMessage: message
+        })
+    }
+
     render() {
         return (
             <div className="container">
@@ -62,6 +71,7 @@ export default class Top extends Component {
                         handleChangePage={this.handleChangePage}
                         departmentList={this.state.departmentList}
                         positionList={this.state.positionList}
+                        setSnackBarMessage={this.setSnackBarMessage}
                     />
                 }
                 {
@@ -73,6 +83,11 @@ export default class Top extends Component {
                         positionList={this.state.positionList}
                     />
                 }
+                <SnackBarMessage
+                    open={this.state.snackBarMessage !== ''}
+                    message={this.state.snackBarMessage}
+                    setSnackBarMessage={this.setSnackBarMessage}
+                />
             </div>
         );
     }
