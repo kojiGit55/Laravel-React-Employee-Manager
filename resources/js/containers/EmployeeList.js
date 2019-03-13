@@ -6,13 +6,17 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
 
 export default class EmployeeList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employeeList: []
-        }
+            employeeList: [],
+            page: 0,
+            rowsPerPage: 10
+        };
+        this.handleChangePage = this.handleChangePage.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +30,12 @@ export default class EmployeeList extends Component {
     handleClickRow(employeeId) {
         this.props.setSelectedEmployeeId(employeeId);
         this.props.handleChangePage('edit');
+    }
+
+    handleChangePage(e, page) {
+        this.setState({
+            page: page
+        });
     }
 
     render() {
@@ -45,7 +55,9 @@ export default class EmployeeList extends Component {
                     </TableHead>
                     <TableBody>
                         {
-                            this.state.employeeList.map(employee => {
+                            this.state.employeeList
+                                .slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
+                                .map(employee => {
                                 const department = this.props.departmentList.find(dep => dep.id === employee.department_id);
                                 const position = this.props.positionList.find(dep => dep.id === employee.position_id);
                                 return (
@@ -61,6 +73,20 @@ export default class EmployeeList extends Component {
                         }
                     </TableBody>
                 </Table>
+                <TablePagination
+                    component="div"
+                    count={this.state.employeeList.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    rowsPerPageOptions={[]}
+                    page={this.state.page}
+                    backIconButtonProps={{
+                        'aria-label': 'Previous Page',
+                    }}
+                    nextIconButtonProps={{
+                        'aria-label': 'Next Page',
+                    }}
+                    onChangePage={this.handleChangePage}
+                />
             </div>
         );
     }
