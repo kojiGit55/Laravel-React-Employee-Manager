@@ -1,10 +1,25 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    wrapper: {
+        width: '100%',
+    },
+    textField: {
+        marginLeft: 5,
+        marginRight: 5,
+        width: '100%'
+    },
+};
 
 const Input = (props) => {
-  return (
-      <div>
+    const { classes } = props;
+
+    return (
+      <div className={classes.wrapper}>
           <TextField
+            className={classes.textField}
             label={props.labelText}
             name={props.name}
             value={props.inputValue}
@@ -14,4 +29,4 @@ const Input = (props) => {
   );
 };
 
-export default Input;
+export default withStyles(styles)(Input);
