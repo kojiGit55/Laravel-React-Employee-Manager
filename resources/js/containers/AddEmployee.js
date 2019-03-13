@@ -26,7 +26,7 @@ export default class AddEmployee extends Component {
 
     validate() {
         const formErrorMessageMap = new Map();
-        if (this.state.name === '') {
+        if (this.state.employee_id === '') {
             formErrorMessageMap.set('employee_id', '社員番号を入力してください')
         }
         if (this.state.name === '') {
@@ -76,21 +76,21 @@ export default class AddEmployee extends Component {
                     name="employee_id"
                     inputValue={this.state.employee_id}
                     handleChange={this.handleChange}
-                    formErrorMessage={this.state.formErrorMessageMap.get("employee_id")}
+                    errorMessage={this.state.formErrorMessageMap.get("employee_id")}
                 />
                 <Input
                     labelText="名前"　
                     name="name"
                     inputValue={this.state.name}
                     handleChange={this.handleChange}
-                    formErrorMessage={this.state.formErrorMessageMap.get("name")}
+                    errorMessage={this.state.formErrorMessageMap.get("name")}
                 />
                 <Input
                     labelText="年齢"　
                     name="age"
                     inputValue={this.state.age}
                     handleChange={this.handleChange}
-                    formErrorMessage={this.state.formErrorMessageMap.get("age")}
+                    errorMessage={this.state.formErrorMessageMap.get("age")}
                 />
                 <SelectBox
                     labelText="部署"
@@ -98,6 +98,7 @@ export default class AddEmployee extends Component {
                     value={this.state.department_id}
                     handleChange={this.handleChange}
                     optionList={this.props.departmentList}
+                    errorMessage={this.state.formErrorMessageMap.get("department_id")}
                 />
                 <SelectBox
                     labelText="役職"
@@ -105,6 +106,7 @@ export default class AddEmployee extends Component {
                     value={this.state.position_id}
                     handleChange={this.handleChange}
                     optionList={this.props.positionList}
+                    errorMessage={this.state.formErrorMessageMap.get("position_id")}
                 />
                 <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
 

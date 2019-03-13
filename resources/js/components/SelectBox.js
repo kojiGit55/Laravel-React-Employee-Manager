@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const styles = {
     wrapper: {
@@ -36,6 +37,7 @@ const Input = (props) => {
                     })
                 }
             </Select>
+            <FormHelperText>{props.errorMessage}</FormHelperText>
         </div>
     );
 };
