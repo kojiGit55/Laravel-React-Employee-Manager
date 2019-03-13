@@ -12,17 +12,46 @@ export default class AddEmployee extends Component {
             name: '',
             age: '',
             department_id: '',
-            position_id: ''
+            position_id: '',
+            formErrorMessageMap: new Map()
         };
         this.handleChange = this.handleChange.bind(this);
         this.addEmployee = this.addEmployee.bind(this);
+        this.validate = this.validate.bind(this);
     }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    validate() {
+        const formErrorMessageMap = new Map();
+        if (this.state.name === '') {
+            formErrorMessageMap.set('employee_id', '社員番号を入力してください')
+        }
+        if (this.state.name === '') {
+            formErrorMessageMap.set('name', '名前を入力してください')
+        }
+        if (this.state.age === '') {
+            formErrorMessageMap.set('age', '年齢を入力してください')
+        }
+        if (this.state.department_id === '') {
+            formErrorMessageMap.set('department_id', '部署を選択してください')
+        }
+        if (this.state.position_id === '') {
+            formErrorMessageMap.set('position_id', '役職を選択してください')
+        }
+
+        this.setState({
+            formErrorMessageMap: formErrorMessageMap
+        });
+
+        return formErrorMessageMap.size === 0;
+    }
+
     addEmployee() {
+        if (!this.validate()) return;
+
         axios.post('/api/employees', {
             employee_id: this.state.employee_id,
             name: this.state.name,
@@ -39,11 +68,30 @@ export default class AddEmployee extends Component {
     }
 
     render() {
+        console.log(this.state.formErrorMessageMap);
         return (
             <div>
-                <Input labelText="社員番号" name="employee_id" inputValue={this.state.employee_id} handleChange={this.handleChange} />
-                <Input labelText="名前"　name="name" inputValue={this.state.name} handleChange={this.handleChange} />
-                <Input labelText="年齢"　name="age" inputValue={this.state.age} handleChange={this.handleChange} />
+                <Input
+                    labelText="社員番号"
+                    name="employee_id"
+                    inputValue={this.state.employee_id}
+                    handleChange={this.handleChange}
+                    formErrorMessage={this.state.formErrorMessageMap.get("employee_id")}
+                />
+                <Input
+                    labelText="名前"　
+                    name="name"
+                    inputValue={this.state.name}
+                    handleChange={this.handleChange}
+                    formErrorMessage={this.state.formErrorMessageMap.get("name")}
+                />
+                <Input
+                    labelText="年齢"　
+                    name="age"
+                    inputValue={this.state.age}
+                    handleChange={this.handleChange}
+                    formErrorMessage={this.state.formErrorMessageMap.get("age")}
+                />
                 <SelectBox
                     labelText="部署"
                     name="department_id"

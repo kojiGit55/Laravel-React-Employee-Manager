@@ -19,11 +19,13 @@ const Input = (props) => {
     return (
       <div className={classes.wrapper}>
           <TextField
+            error={props.formErrorMessage === ''}
             className={classes.textField}
             label={props.labelText}
             name={props.name}
             value={props.inputValue}
             onChange={props.handleChange}
+            helperText={props.formErrorMessage}
           />
       </div>
   );
