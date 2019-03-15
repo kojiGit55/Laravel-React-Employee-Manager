@@ -64,9 +64,9 @@ export default class EmployeeList extends Component {
     render() {
         return (
             <div>
-                <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', textAlign: 'right'}}>
+                <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                     <Search searchText={this.state.searchText} handleChangeSearchText={this.handleChangeSearchText} />
-                    <Button variant="contained" color="default" onClick={this.props.handleChangePage.bind(this, 'add')} style={{margin: 5}}>新規追加</Button>
+                    <Button variant="contained" color="default" onClick={this.props.handleChangePage.bind(this, 'add')} >新規追加</Button>
                 </div>
 
                 <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
