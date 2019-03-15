@@ -41,52 +41,57 @@ export default class EmployeeList extends Component {
     render() {
         return (
             <div>
-                <Button color="primary" onClick={this.props.handleChangePage.bind(this, 'add')}>新規追加</Button>
+                <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', textAlign: 'right'}}>
+                    <Button variant="contained" color="default" onClick={this.props.handleChangePage.bind(this, 'add')} style={{margin: 5}}>新規追加</Button>
+                </div>
 
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>社員番号</TableCell>
-                            <TableCell>名前</TableCell>
-                            <TableCell>年齢</TableCell>
-                            <TableCell>部署</TableCell>
-                            <TableCell>役職</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            this.state.employeeList
-                                .slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
-                                .map(employee => {
-                                const department = this.props.departmentList.find(dep => dep.id === employee.department_id);
-                                const position = this.props.positionList.find(dep => dep.id === employee.position_id);
-                                return (
-                                    <TableRow key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
-                                        <TableCell>{employee.employee_id}</TableCell>
-                                        <TableCell>{employee.name}</TableCell>
-                                        <TableCell>{employee.age}</TableCell>
-                                        <TableCell>{department !== undefined && department.name}</TableCell>
-                                        <TableCell>{position !== undefined && position.name}</TableCell>
-                                    </TableRow>
-                                );
-                            })
-                        }
-                    </TableBody>
-                </Table>
-                <TablePagination
-                    component="div"
-                    count={this.state.employeeList.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    rowsPerPageOptions={[]}
-                    page={this.state.page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={this.handleChangePage}
-                />
+                <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>社員番号</TableCell>
+                                <TableCell>名前</TableCell>
+                                <TableCell>年齢</TableCell>
+                                <TableCell>部署</TableCell>
+                                <TableCell>役職</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                this.state.employeeList
+                                    .slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
+                                    .map(employee => {
+                                    const department = this.props.departmentList.find(dep => dep.id === employee.department_id);
+                                    const position = this.props.positionList.find(dep => dep.id === employee.position_id);
+                                    return (
+                                        <TableRow key={employee.id} onClick={() => this.handleClickRow(employee.employee_id)}>
+                                            <TableCell>{employee.employee_id}</TableCell>
+                                            <TableCell>{employee.name}</TableCell>
+                                            <TableCell>{employee.age}</TableCell>
+                                            <TableCell>{department !== undefined && department.name}</TableCell>
+                                            <TableCell>{position !== undefined && position.name}</TableCell>
+                                        </TableRow>
+                                    );
+                                })
+                            }
+                        </TableBody>
+                    </Table>
+                    <TablePagination
+                        component="div"
+                        count={this.state.employeeList.length}
+                        rowsPerPage={this.state.rowsPerPage}
+                        rowsPerPageOptions={[]}
+                        page={this.state.page}
+                        backIconButtonProps={{
+                            'aria-label': 'Previous Page',
+                        }}
+                        nextIconButtonProps={{
+                            'aria-label': 'Next Page',
+                        }}
+                        onChangePage={this.handleChangePage}
+                    />
+                </div>
+
             </div>
         );
     }

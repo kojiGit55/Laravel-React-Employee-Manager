@@ -7,12 +7,16 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 const styles = {
     wrapper: {
-        width: '100%'
+        width: '100%',
+        marginTop: 20,
+    },
+    inputLabel: {
+        marginLeft: 50,
+        display: 'block'
     },
     selectBox: {
-        marginLeft: 5,
-        marginRight: 5,
-        width: '100%'
+        marginLeft: 50,
+        width: '80%'
     },
 };
 
@@ -21,7 +25,7 @@ const Input = (props) => {
 
     return (
         <div className={classes.wrapper}>
-            <InputLabel htmlFor={props.name}>{props.labelText}</InputLabel>
+            <InputLabel className={classes.inputLabel} htmlFor={props.name}>{props.labelText}</InputLabel>
             <Select
                 className={classes.selectBox}
                 inputProps={{

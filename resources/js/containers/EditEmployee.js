@@ -87,10 +87,17 @@ export default class EditEmployee extends Component {
                     handleChange={this.handleChange}
                     optionList={this.props.positionList}
                 />
-                <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
+                <div style={{
+                    marginLeft: 50,
+                    width: '80%'
+                }}>
+                    <Button variant="contained" color="default" onClick={this.props.handleChangePage.bind(this, 'list')} style={{float: 'left'}}>一覧に戻る</Button>
 
-                <Button onClick={this.deleteEmployee}>社員を削除</Button>
-                <Button onClick={this.editEmployee}>社員を編集</Button>
+                    <div style={{float: 'right'}}>
+                        <Button variant="contained" color="default" onClick={this.deleteEmployee} style={{marginRight: 10}}>社員を削除</Button>
+                        <Button variant="contained" color="default" onClick={this.editEmployee}>社員を編集</Button>
+                    </div>
+                </div>
             </div>
         );
     }

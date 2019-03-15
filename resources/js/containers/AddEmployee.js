@@ -68,7 +68,6 @@ export default class AddEmployee extends Component {
     }
 
     render() {
-        console.log(this.state.formErrorMessageMap);
         return (
             <div>
                 <Input
@@ -108,9 +107,13 @@ export default class AddEmployee extends Component {
                     optionList={this.props.positionList}
                     errorMessage={this.state.formErrorMessageMap.get("position_id")}
                 />
-                <Button　onClick={this.props.handleChangePage.bind(this, 'list')}>一覧に戻る</Button>
-
-                <Button onClick={this.addEmployee}>社員を追加</Button>
+                <div style={{
+                    marginLeft: 50,
+                    width: '80%'
+                }}>
+                    <Button onClick={this.props.handleChangePage.bind(this, 'list')} variant="contained" color="default" style={{float: 'left'}}>一覧に戻る</Button>
+                    <Button onClick={this.addEmployee} variant="contained" color="default" style={{float: 'right'}}>社員を追加</Button>
+                </div>
             </div>
         );
     }

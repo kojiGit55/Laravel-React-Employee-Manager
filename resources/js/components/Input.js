@@ -5,11 +5,12 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     wrapper: {
         width: '100%',
+        marginTop: 20,
+        marginBottom: 20
     },
     textField: {
-        marginLeft: 5,
-        marginRight: 5,
-        width: '100%'
+        marginLeft: 50,
+        width: '80%'
     },
 };
 
