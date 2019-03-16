@@ -11,8 +11,11 @@ use App\Employee;
 
 class EmployeeService
 {
-    public function getEmployees()
+    public function getEmployees($name = '')
     {
+        if ($name !== '') {
+            return Employee::where('name', 'like', "%$name%")->orderBy('employee_id')->get();
+        }
         return Employee::orderBy('employee_id')->get();
     }
 

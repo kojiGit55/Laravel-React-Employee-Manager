@@ -19,9 +19,9 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employees = $this->employee->getEmployees();
+        $employees = $this->employee->getEmployees($request->name);
         return response()->json($employees);
     }
 
