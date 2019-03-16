@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiClient from "../utils/apiClient";
 import Input from "../components/Input";
 import Button from '@material-ui/core/Button';
 import SelectBox from "../components/SelectBox";
@@ -20,7 +20,7 @@ export default class EditEmployee extends Component {
     }
 
     componentDidMount() {
-        axios.get(`/api/employees/${this.props.selectedEmployeeId}`)
+        apiClient.get(`/api/employees/${this.props.selectedEmployeeId}`)
             .then(res => {
                 this.setState({
                     employee_id: res.data.employee_id,
@@ -39,7 +39,7 @@ export default class EditEmployee extends Component {
     }
 
     editEmployee() {
-        axios.put(`/api/employees/${this.props.selectedEmployeeId}`, {
+        apiClient.put(`/api/employees/${this.props.selectedEmployeeId}`, {
             employee_id: this.state.employee_id,
             name: this.state.name,
             age: this.state.age,
@@ -57,7 +57,7 @@ export default class EditEmployee extends Component {
     deleteEmployee() {
         if (!window.confirm('本当にこの社員を削除しますか？')) return;
 
-        axios.delete(`/api/employees/${this.props.selectedEmployeeId}`)
+        apiClient.delete(`/api/employees/${this.props.selectedEmployeeId}`)
             .then(res => {
                 alert('社員の削除に成功しました');
             }).catch(err => {

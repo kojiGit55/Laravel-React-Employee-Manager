@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiClient from '../utils/apiClient';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,7 +23,7 @@ export default class EmployeeList extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/employees').then(res => {
+        apiClient.get('/api/employees').then(res => {
             this.setState({
                 employeeList: res.data
             });
@@ -32,7 +32,7 @@ export default class EmployeeList extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.searchText !== this.state.searchText) {
-            axios.get('/api/employees', {
+            apiClient.get('/api/employees', {
                 params: {
                     name: this.state.searchText
                 }

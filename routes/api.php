@@ -17,6 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'api'], function() {
-   Route::resource('employees', 'EmployeeController');
+Route::group(["middleware" => "api"], function () {
+    Route::post("/login", "LoginController@login");
+});
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('me', 'LoginController@me');
+    Route::resource('employees', 'EmployeeController');
+    Route::resource('departments', 'departmentController');
+    Route::resource('positions', 'PositionController');
 });
