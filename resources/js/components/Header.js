@@ -32,7 +32,7 @@ function Header(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         社員管理
                     </Typography>
-                    <Button color="inherit">Logout</Button>
+                    <Button color="inherit" onClick={props.logout}>Logout</Button>
                 </Toolbar>
             </AppBar>
         </div>

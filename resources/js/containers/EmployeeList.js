@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiClient from '../utils/apiClient';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+import Search from "../components/Search";
 
 export default class EmployeeList extends Component {
     constructor(props) {
@@ -14,17 +15,33 @@ export default class EmployeeList extends Component {
         this.state = {
             employeeList: [],
             page: 0,
-            rowsPerPage: 10
+            rowsPerPage: 10,
+            searchText: ''
         };
         this.handleChangePage = this.handleChangePage.bind(this);
+        this.handleChangeSearchText = this.handleChangeSearchText.bind(this);
     }
 
     componentDidMount() {
-        axios.get('/api/employees').then(res => {
+        apiClient.get('/api/employees').then(res => {
             this.setState({
                 employeeList: res.data
             });
         });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.searchText !== this.state.searchText) {
+            apiClient.get('/api/employees', {
+                params: {
+                    name: this.state.searchText
+                }
+            }).then(res => {
+                this.setState({
+                    employeeList: res.data
+                });
+            })
+        }
     }
 
     handleClickRow(employeeId) {
@@ -38,11 +55,18 @@ export default class EmployeeList extends Component {
         });
     }
 
+    handleChangeSearchText(e) {
+        this.setState({
+            searchText: e.target.value
+        });
+    }
+
     render() {
         return (
             <div>
-                <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', textAlign: 'right'}}>
-                    <Button variant="contained" color="default" onClick={this.props.handleChangePage.bind(this, 'add')} style={{margin: 5}}>新規追加</Button>
+                <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Search searchText={this.state.searchText} handleChangeSearchText={this.handleChangeSearchText} />
+                    <Button variant="contained" color="default" onClick={this.props.handleChangePage.bind(this, 'add')} >新規追加</Button>
                 </div>
 
                 <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
@@ -91,7 +115,6 @@ export default class EmployeeList extends Component {
                         onChangePage={this.handleChangePage}
                     />
                 </div>
-
             </div>
         );
     }

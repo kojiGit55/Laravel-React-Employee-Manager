@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import apiClient from '../utils/apiClient';
 import Button from '@material-ui/core/Button';
 import Input from "../components/Input";
 import SelectBox from "../components/SelectBox";
@@ -52,7 +52,7 @@ export default class AddEmployee extends Component {
     addEmployee() {
         if (!this.validate()) return;
 
-        axios.post('/api/employees', {
+        apiClient.post('/api/employees', {
             employee_id: this.state.employee_id,
             name: this.state.name,
             age: this.state.age,
