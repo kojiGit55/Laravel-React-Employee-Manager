@@ -4,46 +4,53 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 
 const styles = {
     wrapper: {
         width: '100%',
         marginTop: 20,
+        display: 'inline'
     },
-    inputLabel: {
-        marginLeft: 50,
-        display: 'block'
+    formControl: {
+        width: '80%',
+        margin: '0 auto'
     },
     selectBox: {
-        marginLeft: 50,
-        width: '80%'
+        width: '100%',
     },
 };
 
-const Input = (props) => {
+const SelectBox = (props) => {
     const { classes } = props;
 
     return (
         <div className={classes.wrapper}>
-            <InputLabel className={classes.inputLabel} htmlFor={props.name}>{props.labelText}</InputLabel>
-            <Select
-                className={classes.selectBox}
-                inputProps={{
-                    name: props.name,
-                    id: props.name,
-                }}
-                value={props.value}
-                onChange={props.handleChange}
-            >
-                {
-                    props.optionList.map(option => {
-                        return <MenuItem value={option.id} key={option.id}>{option.name}</MenuItem>;
-                    })
-                }
-            </Select>
-            <FormHelperText>{props.errorMessage}</FormHelperText>
+            <FormControl className={classes.formControl}>
+
+                <InputLabel className={classes.inputLabel} htmlFor={props.name}>{props.labelText}</InputLabel>
+                <Select
+                    className={classes.selectBox}
+                    inputProps={{
+                        name: props.name,
+                        id: props.name,
+                    }}
+                    value={props.value}
+                    onChange={props.handleChange}
+                >
+                    <MenuItem value="">None</MenuItem>
+                    {
+                        props.optionList.map(option => {
+                            return <MenuItem value={option.id} key={option.id}>{option.name}</MenuItem>;
+                        })
+                    }
+                </Select>
+                <FormHelperText>{props.errorMessage}</FormHelperText>
+
+            </FormControl>
+
         </div>
     );
 };
 
-export default withStyles(styles)(Input);
+export default withStyles(styles)(SelectBox);

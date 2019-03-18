@@ -9,7 +9,6 @@ const styles = {
         marginBottom: 20
     },
     textField: {
-        marginLeft: 50,
         width: '80%'
     },
 };
@@ -20,6 +19,7 @@ const Input = (props) => {
     return (
       <div className={classes.wrapper}>
           <TextField
+            variant="outlined"
             error={props.errorMessage === ''}
             className={classes.textField}
             label={props.labelText}
