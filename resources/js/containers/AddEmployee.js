@@ -111,7 +111,7 @@ export default class AddEmployee extends Component {
                     margin: '20px auto',
                     width: '80%'
                 }}>
-                    <Button onClick={this.props.handleChangePage.bind(this, 'list')} variant="contained" color="default" style={{float: 'left'}}>一覧に戻る</Button>
+                    <Button onClick={() => this.props.handleChangePage('list')} variant="contained" color="default" style={{float: 'left'}}>一覧に戻る</Button>
                     <Button onClick={this.addEmployee} variant="contained" color="default" style={{float: 'right'}}>社員を追加</Button>
                 </div>
             </div>
