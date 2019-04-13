@@ -69,7 +69,7 @@ export default class AddEmployee extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{textAlign: 'center'}}>
                 <Input
                     labelText="社員番号"
                     name="employee_id"
@@ -108,10 +108,10 @@ export default class AddEmployee extends Component {
                     errorMessage={this.state.formErrorMessageMap.get("position_id")}
                 />
                 <div style={{
-                    marginLeft: 50,
+                    margin: '20px auto',
                     width: '80%'
                 }}>
-                    <Button onClick={this.props.handleChangePage.bind(this, 'list')} variant="contained" color="default" style={{float: 'left'}}>一覧に戻る</Button>
+                    <Button onClick={() => this.props.handleChangePage('list')} variant="contained" color="default" style={{float: 'left'}}>一覧に戻る</Button>
                     <Button onClick={this.addEmployee} variant="contained" color="default" style={{float: 'right'}}>社員を追加</Button>
                 </div>
             </div>

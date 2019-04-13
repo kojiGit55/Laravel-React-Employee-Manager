@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './Input';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -37,8 +38,10 @@ export default class Login extends Component {
 
     render() {
       return (
-          <div>
+          <div style={{ textAlign: 'center' }}>
+              <Typography color="default" variant="h3" style={{margin: 50}}>LOGIN</Typography>
               <Input
+                  variant="outlined"
                   labelText="ユーザ名"
                   name="userName"
                   inputValue={this.state.userName}
@@ -46,6 +49,7 @@ export default class Login extends Component {
                   errorMessage={this.state.formErrorMessageMap.get("userName")}
               />
               <Input
+                  variant="outlined"
                   labelText="パスワード"
                   name="password"
                   inputValue={this.state.password}
@@ -53,7 +57,7 @@ export default class Login extends Component {
                   errorMessage={this.state.formErrorMessageMap.get("password")}
               />
 
-              <Button onClick={this.handleClickLogin}>ログイン</Button>
+              <Button variant="contained" color="default" style={{width: "80%"}} onClick={this.handleClickLogin}>ログイン</Button>
           </div>
       );
     }

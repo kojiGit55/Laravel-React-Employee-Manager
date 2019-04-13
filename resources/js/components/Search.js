@@ -9,7 +9,7 @@ const styles = {
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
-        width: 400,
+        width: '60%',
         margin: '10px 10px 10px 200px'
     },
     input: {
