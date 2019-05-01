@@ -30,20 +30,6 @@ export default class EmployeeList extends Component {
         });
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.searchText !== this.state.searchText) {
-            apiClient.get('/api/employees', {
-                params: {
-                    name: this.state.searchText
-                }
-            }).then(res => {
-                this.setState({
-                    employeeList: res.data
-                });
-            })
-        }
-    }
-
     handleClickRow(employeeId) {
         this.props.setSelectedEmployeeId(employeeId);
         this.props.handleChangePage('edit');
@@ -62,6 +48,10 @@ export default class EmployeeList extends Component {
     }
 
     render() {
+        const filteredEmployeeList = this.state.employeeList
+            .filter(employee => {
+                return employee.name.indexOf(this.state.searchText) > -1
+            });
         return (
             <div>
                 <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
@@ -82,7 +72,7 @@ export default class EmployeeList extends Component {
                         </TableHead>
                         <TableBody>
                             {
-                                this.state.employeeList
+                                filteredEmployeeList
                                     .slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
                                     .map(employee => {
                                     const department = this.props.departmentList.find(dep => dep.id === employee.department_id);
@@ -102,7 +92,7 @@ export default class EmployeeList extends Component {
                     </Table>
                     <TablePagination
                         component="div"
-                        count={this.state.employeeList.length}
+                        count={filteredEmployeeList.length}
                         rowsPerPage={this.state.rowsPerPage}
                         rowsPerPageOptions={[]}
                         page={this.state.page}
